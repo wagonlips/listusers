@@ -23,30 +23,15 @@ License: GPL2
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
-add_action('admin_menu', 'list_users_menu');
-
-function list_users_menu() {
-
-  add_options_page('List Users Options', 'List Users', 'manage_options', 'list-users-settings', 'list_users_options');
-
+function widget_list_users_register() {
+    function widget_list_users($args) {
+      extract($args);
+      echo $before_widget; 
+      echo $before_title . 'List Users Widget' . $after_title; 
+      ?> Hello, everyone!  <?php 
+      echo $after_widget;    
+    }
+    register_sidebar_widget('List Users Widget','widget_list_users');
 }
-
-function list_users_options() {
-
-  if (!current_user_can('manage_options'))  {
-    wp_die( __('You do not have sufficient permissions to access this page.') );
-  }
-?>
-<div class="wrap">
-<h2><?php _e( 'List Users', 'list-users-settings' ) ?></h2>
-<p><?php _e('Enter the Usernames separated by commas of the users you would like to list.') ?></p>
-<form method="post" name="listUsersUserList">
-<textarea rows="6" cols="50">
-</textarea><br />
-<input type="submit" value="<?php _e('Save') ?>" />
-</form>
-</div>
-<?php
-}
-
+add_action('init', widget_list_users_register);
 ?>
