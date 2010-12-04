@@ -36,11 +36,17 @@ function list_users_options() {
   if (!current_user_can('manage_options'))  {
     wp_die( __('You do not have sufficient permissions to access this page.') );
   }
-
-  echo '<div class="wrap">';
-  echo '<p>Here is where the form would go if I actually had options.</p>';
-  echo '</div>';
-
+?>
+<div class="wrap">
+<h2><?php _e( 'List Users', 'list-users-settings' ) ?></h2>
+<p><?php _e('Enter the Usernames separated by commas of the users you would like to list.') ?></p>
+<form method="post" name="listUsersUserList">
+<textarea rows="6" cols="50">
+</textarea><br />
+<input type="submit" value="<?php _e('Save') ?>" />
+</form>
+</div>
+<?php
 }
 
 ?>
