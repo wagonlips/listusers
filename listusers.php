@@ -23,7 +23,7 @@ License: GPL2
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 */
-add_action('init', widget_list_users_register);
+add_action('widgets_init', widget_list_users_register);
 function widget_list_users_register() {
   register_widget('List_Users');
 }
@@ -55,10 +55,41 @@ class List_Users extends WP_Widget {
 
     /* Display name from widget settings if one was input. */
     if ( $name )
-      printf( '<p>' . __('These are the names %1$s.', 'example') . '</p>', $name );
+      printf( '<p>' . __('These are the names %1$s.', 'listusers') . '</p>', $name );
 
     /* After widget (defined by themes). */
     echo $after_widget;
+  }
+  /* Update the widget settings. */
+  function update( $new_instance, $old_instance ) {
+    $instance = $old_instance;
+
+    /* Strip tags for title and name to remove HTML. */
+    $instance['title'] = strip_tags( $new_instance['title'] );
+    $instance['name'] = strip_tags( $new_instance['name'] );
+
+    return $instance;
+  }
+  /* Display the widget settings controls on the widget panel. */
+  function form( $instance ) {
+
+    /* Set up some default widget settings. */
+    $defaults = array( 'title' => __('List Users', 'listusers'), 'name' => __('John Doe', 'listusers') );
+    $instance = wp_parse_args( (array) $instance, $defaults ); ?>
+
+      <!-- Widget Title: Text Input -->
+      <p>
+      <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'hybrid'); ?></label>
+      <input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:100%;" />
+      </p>
+
+      <!-- Your Name: Text Input -->
+      <p>
+      <label for="<?php echo $this->get_field_id( 'name' ); ?>"><?php _e('Your Name:', 'listusers'); ?></label>
+      <input id="<?php echo $this->get_field_id( 'name' ); ?>" name="<?php echo $this->get_field_name( 'name' ); ?>" value="<?php echo $instance['name']; ?>" style="width:100%;" />
+      </p>
+
+      <?php
   }
 }
 ?>
