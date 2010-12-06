@@ -44,7 +44,7 @@ class List_Users extends WP_Widget {
 
     /* Our variables from the widget settings. */
     $title = apply_filters('widget_title', $instance['title'] );
-    $name = $instance['name'];
+    $names = $instance['name'];
 
     /* Before widget (defined by themes). */
     echo $before_widget;
@@ -53,9 +53,15 @@ class List_Users extends WP_Widget {
     if ( $title )
       echo $before_title . $title . $after_title;
 
-    /* Display name from widget settings if one was input. */
-    if ( $name )
-      printf( '<p>' . __('These are the names %1$s.', 'listusers') . '</p>', $name );
+    /* Display names from widget settings if any were input. */
+    if ( $names ) {
+      echo "<ul>";
+      $names_list = (explode(",",$names));
+      foreach ($names_list as $name) {
+        printf( '<li>' . __('%1$s.', 'listusers') . '</li>', $name );
+      }
+      echo "</ul>";
+    }
 
     /* After widget (defined by themes). */
     echo $after_widget;
@@ -80,13 +86,13 @@ class List_Users extends WP_Widget {
       <!-- Widget Title: Text Input -->
       <p>
       <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'hybrid'); ?></label>
-      <input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:100%;" />
+      <input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" />
       </p>
 
-      <!-- Your Name: Text Input -->
+      <!-- The names: Text Input -->
       <p>
-      <label for="<?php echo $this->get_field_id( 'name' ); ?>"><?php _e('Your Name:', 'listusers'); ?></label>
-      <input id="<?php echo $this->get_field_id( 'name' ); ?>" name="<?php echo $this->get_field_name( 'name' ); ?>" value="<?php echo $instance['name']; ?>" style="width:100%;" />
+      <label for="<?php echo $this->get_field_id( 'name' ); ?>"><?php _e('The Usernames (separated by commas):', 'listusers'); ?></label>
+      <textarea id="<?php echo $this->get_field_id( 'name' ); ?>" name="<?php echo $this->get_field_name( 'name' ); ?>"> <?php echo $instance['name']; ?> </textarea>
       </p>
 
       <?php
