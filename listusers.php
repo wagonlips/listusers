@@ -56,9 +56,12 @@ class List_Users extends WP_Widget {
     /* Display names from widget settings if any were input. */
     if ( $names ) {
       echo "<ul>";
+      // Strip the spaces from the string.
+      $names = (str_replace(" ","",$names));
+      // Break the string into an array separated by commas.
       $names_list = (explode(",",$names));
       foreach ($names_list as $name) {
-        printf( '<li>' . __('%1$s.', 'listusers') . '</li>', $name );
+        printf( '<li>' . __('<a href="/author/%1$s">%1$s</a>', 'listusers') . '</li>', $name );
       }
       echo "</ul>";
     }
@@ -92,7 +95,7 @@ class List_Users extends WP_Widget {
       <!-- The names: Text Input -->
       <p>
       <label for="<?php echo $this->get_field_id( 'name' ); ?>"><?php _e('The Usernames (separated by commas):', 'listusers'); ?></label>
-      <textarea id="<?php echo $this->get_field_id( 'name' ); ?>" name="<?php echo $this->get_field_name( 'name' ); ?>"> <?php echo $instance['name']; ?> </textarea>
+      <textarea id="<?php echo $this->get_field_id( 'name' ); ?>" name="<?php echo $this->get_field_name( 'name' ); ?>"><?php echo $instance['name']; ?></textarea>
       </p>
 
       <?php
