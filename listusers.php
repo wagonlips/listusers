@@ -2,13 +2,14 @@
 /*
 Plugin Name: List Users
 Plugin URI: https://github.com/wagonlips/listusers
-Description: A plugin to list specific users in WordPress and show the posts they've written.
+Description: A plugin to list specific users in WordPress and show the posts they've written.!!! Only works with pretty permalinks turned on. !!!
              Using a widget, specific names selected by an admin will be displayed in a sidebar, 
              which when clicked, the category of authored pages will be displayed.
-             !!! Only works with pretty permalinks turned on. !!!
+             
 Version: 0.1
 Author: Sean Camden renamed a few variables and added a few lines to Justin Tadlock's widget tutorial.
-Author URI: http://computerdemon.com but you can see the source at the following URL:
+Author URI: http://seancamden.com 
+            but you can see the source at the following URL:
             http://justintadlock.com/archives/2009/05/26/the-complete-guide-to-creating-widgets-in-wordpress-28
 License: GPL2
     This program is free software: you can redistribute it and/or modify
