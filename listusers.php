@@ -5,9 +5,11 @@ Plugin URI: https://github.com/wagonlips/listusers
 Description: A plugin to list specific users in WordPress and show the posts they've written.
              Using a widget, specific names selected by an admin will be displayed in a sidebar, 
              which when clicked, the category of authored pages will be displayed.
+             !!! Only works with pretty permalinks turned on. !!!
 Version: 0.1
-Author: Sean Camden
-Author URI: http://computerdemon.com
+Author: Sean Camden renamed a few variables and added a few lines to Justin Tadlock's widget tutorial.
+Author URI: http://computerdemon.com but you can see the source at the following URL:
+            http://justintadlock.com/archives/2009/05/26/the-complete-guide-to-creating-widgets-in-wordpress-28
 License: GPL2
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -95,7 +97,7 @@ class List_Users extends WP_Widget {
       <!-- The names: Text Input -->
       <p>
       <label for="<?php echo $this->get_field_id( 'name' ); ?>"><?php _e('The Usernames (separated by commas):', 'listusers'); ?></label>
-      <textarea id="<?php echo $this->get_field_id( 'name' ); ?>" name="<?php echo $this->get_field_name( 'name' ); ?>"><?php echo $instance['name']; ?></textarea>
+      <textarea id="<?php echo $this->get_field_id( 'name' ); ?>" name="<?php echo $this->get_field_name( 'name' ); ?>" rows="5" cols="33"><?php echo $instance['name']; ?></textarea>
       </p>
 
       <?php
